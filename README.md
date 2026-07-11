@@ -281,6 +281,7 @@ pip install -r requirements.txt
 
 ```bash
 python app.py
+command: flask run
 ```
 
 ---
@@ -298,7 +299,7 @@ http://127.0.0.1:5000
 ## 1. Home Page
 
 ```
-<img src="App Images/home.png" alt="Home Page">
+![Home Page](AppImages/home.png)
 ```
 
 ---
@@ -306,7 +307,7 @@ http://127.0.0.1:5000
 ## 2. Prediction Page
 
 ```
-<img src="App Images/prediction.png" alt="Prediction Page">
+![Prediction Page](AppImages/prediction.png)
 ```
 
 ---
@@ -314,15 +315,17 @@ http://127.0.0.1:5000
 ## 3. Prediction Result
 
 ```
-<img src="App Images/predictionResult.png" alt="Prediction Result">
-<img src="App Images/predictionResult2.png" alt="Prediction Result">
+![Prediction Result](AppImages/predictionResult.png)
+![Prediction Result](AppImages/predictionResult2.png)
 ```
 
 ---
 
 ## 4. About Page
-<img src="App Images/about-c.png" alt="About Page">
-<img src="App Images/about.png" alt="About Page">
+
+```
+![About Page](AppImages/about-c.png)
+![About Page](AppImages/about.png)
 
 ---
 
