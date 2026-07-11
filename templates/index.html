@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oral Disease Detection System</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- HEADER -->
+        <header class="header">
+            <div class="nav-container">
+                <a href="/" class="logo">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="tooth-icon" style="color: var(--primary-blue);">
+                        <path d="M4 12C4 8 7 4 12 4C17 4 20 8 20 12C20 16 18 19 16 20C14.5 20.8 13.5 20 12 20C10.5 20 9.5 20.8 8 20C6 19 4 16 4 12Z"/>
+                        <path d="M12 4V8"/>
+                    </svg>
+                    <span>OralVision</span> AI
+                </a>
+                <nav class="nav-menu-wrapper">
+                    <ul class="nav-menu">
+                        <li><a href="/" class="nav-link active">Home</a></li>
+                        <li><a href="/result?new=true" class="nav-link">Analyze Image</a></li>
+                        <li><a href="/about" class="nav-link">About & Model</a></li>
+                    </ul>
+                </nav>
+                <button class="burger" aria-label="Toggle navigation">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            
+            <!-- HERO SECTION -->
+            <section class="hero-section scroll-reveal active">
+                <div class="hero-info">
+                    <div class="accuracy-badge">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                        <span>81.80% Test Accuracy (EfficientNetB0)</span>
+                    </div>
+                    <h1 class="hero-title"><span>Oral Disease</span> Detection System</h1>
+                    <p class="hero-description">
+                        Scan, detect, and analyze oral health conditions in seconds. Leverage state-of-the-art Deep Learning to classify six critical dental conditions with high precision.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="/result?new=true" class="btn btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                            Start Screening
+                        </a>
+                        <a href="/about" class="btn btn-secondary">Learn Methodology</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <!-- Clean Vector Healthcare AI Illustration -->
+                    <svg viewBox="0 0 500 400" width="450" height="360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Background Glows -->
+                        <circle cx="250" cy="200" r="140" fill="url(#hero-glow)" opacity="0.45"/>
+                        <!-- Scanning Grid Lines -->
+                        <path d="M120 140 H380 M120 200 H380 M120 260 H380" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="6 6"/>
+                        <path d="M180 80 V320 M250 80 V320 M320 80 V320" stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="6 6"/>
+                        <!-- Main Scanner Shield -->
+                        <rect x="160" y="100" width="180" height="200" rx="24" fill="white" stroke="#2563EB" stroke-width="3" filter="drop-shadow(0 20px 25px rgba(15, 23, 42, 0.08))" />
+                        <!-- Target Box Corners -->
+                        <path d="M180 140 H200 M180 140 V160" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M320 140 H300 M320 140 V160" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M180 260 H200 M180 260 V240" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M320 260 H300 M320 260 V240" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Tooth Icon inside Shield -->
+                        <path d="M220 200C220 185 231 170 250 170C269 170 280 185 280 200C280 215 272.5 226.25 265 230C259.375 233 255.625 230 250 230C244.375 230 240.625 233 235 230C227.5 226.25 220 215 220 200Z" fill="url(#tooth-grad)" filter="drop-shadow(0 4px 8px rgba(37, 99, 235, 0.15))"/>
+                        <!-- Hologram Lines -->
+                        <line x1="140" y1="120" x2="160" y2="120" stroke="#2563EB" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="340" y1="280" x2="360" y2="280" stroke="#06B6D4" stroke-width="3" stroke-linecap="round"/>
+                        <!-- AI Nodes -->
+                        <circle cx="210" cy="140" r="5" fill="#2563EB" />
+                        <line x1="210" y1="140" x2="250" y2="120" stroke="#2563EB" stroke-width="1.5" />
+                        <circle cx="250" cy="120" r="5" fill="#06B6D4" />
+                        <circle cx="300" cy="160" r="5" fill="#10B981" />
+                        <!-- Gradients definition -->
+                        <defs>
+                            <radialGradient id="hero-glow" cx="0.5" cy="0.5" r="0.5" fx="0.5" fy="0.5">
+                                <stop offset="0%" stop-color="#E0F2FE" />
+                                <stop offset="100%" stop-color="#F8FAFC" stop-opacity="0" />
+                            </radialGradient>
+                            <linearGradient id="tooth-grad" x1="220" y1="170" x2="280" y2="230" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#2563EB"/>
+                                <stop offset="1" stop-color="#06B6D4"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- FEATURES SECTION -->
+            <section class="section scroll-reveal">
+                <div class="section-header">
+                    <span class="section-label">Features</span>
+                    <h2 class="section-title">High-Performance AI Screening</h2>
+                    <p style="color: var(--text-secondary);">Designed for accuracy, transparency, and clinical usability.</p>
+                </div>
+                <div class="features-grid">
+                    <!-- Feature 1 -->
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon-wrapper">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="22 12 18 12 15 21 9 3 6 12 2 12"></polygon>
+                            </svg>
+                        </div>
+                        <h3>EfficientNetB0 Backbone</h3>
+                        <p>Powered by a specialized deep learning model, delivering the optimal balance between computational efficiency and classification accuracy.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon-wrapper">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                                <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                            </svg>
+                        </div>
+                        <h3>Top-3 Predictions</h3>
+                        <p>Provides deep diagnostic confidence by reporting the primary predicted condition along with the second and third most likely classification alternatives.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="glass-card feature-card">
+                        <div class="feature-icon-wrapper">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <h3>Clinical Metadata</h3>
+                        <p>Each prediction is complemented with patient-oriented descriptions, potential symptoms, and preventive oral health recommendations.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SUPPORTED DISEASES SECTION -->
+            <section class="section scroll-reveal">
+                <div class="section-header">
+                    <span class="section-label">Supported Diseases</span>
+                    <h2 class="section-title">6 Classes of Oral Pathologies</h2>
+                    <p style="color: var(--text-secondary);">The deep neural network has been trained to detect and identify the following conditions.</p>
+                </div>
+                <div class="disease-grid">
+                    <!-- Disease 1 -->
+                    <div class="glass-card disease-card">
+                        <span class="badge">Periodontal</span>
+                        <h3>Calculus</h3>
+                        <p>Hardened dental plaque deposits that form on the tooth surfaces, causing gum irritation and receding tissue.</p>
+                        <a href="/result?new=true" class="card-link">
+                            Scan Calculus
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                    <!-- Disease 2 -->
+                    <div class="glass-card disease-card">
+                        <span class="badge">Infectious</span>
+                        <h3>Caries (Tooth Decay)</h3>
+                        <p>Damage to the structural tooth enamel from bacterial acids, leading to localized cavities and tooth discomfort.</p>
+                        <a href="/result?new=true" class="card-link">
+                            Scan Caries
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                    <!-- Disease 3 -->
+                    <div class="glass-card disease-card">
+                        <span class="badge">Inflammatory</span>
+                        <h3>Gingivitis</h3>
+                        <p>Inflammation of the gingival tissue surrounding teeth, causing redness, swelling, and bleeding during normal care.</p>
+                        <a href="/result?new=true" class="card-link">
+                            Scan Gingivitis
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                    <!-- Disease 4 -->
+                    <div class="glass-card disease-card">
+                        <span class="badge">Developmental</span>
+                        <h3>Hypodontia</h3>
+                        <p>Congenital absence of one or more teeth, causing functional alignment gaps and structural changes in dentition.</p>
+                        <a href="/result?new=true" class="card-link">
+                            Scan Hypodontia
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                    <!-- Disease 5 -->
+                    <div class="glass-card disease-card">
+                        <span class="badge">Mucosal</span>
+                        <h3>Mouth Ulcer</h3>
+                        <p>Painful sores occurring on the mucous membranes inside the mouth, cheeks, or under the tongue.</p>
+                        <a href="/result?new=true" class="card-link">
+                            Scan Ulcers
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                    <!-- Disease 6 -->
+                    <div class="glass-card disease-card">
+                        <span class="badge">Cosmetic</span>
+                        <h3>Tooth Discoloration</h3>
+                        <p>Internal or external stains affecting enamel color, caused by food coloring, coffee, aging, or dental trauma.</p>
+                        <a href="/result?new=true" class="card-link">
+                            Scan Staining
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-blue);">
+                            <path d="M4 12C4 8 7 4 12 4C17 4 20 8 20 12C20 16 18 19 16 20C14.5 20.8 13.5 20 12 20C10.5 20 9.5 20.8 8 20C6 19 4 16 4 12Z"/>
+                            <path d="M12 4V8"/>
+                        </svg>
+                        <span>OralVision</span> AI
+                    </a>
+                    <p>Advanced Deep Learning for rapid detection and classification of dental pathologies.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/result?new=true">Analyze Image</a></li>
+                        <li><a href="/about">About & Model</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal & Safety</h4>
+                    <ul>
+                        <li><span style="font-size: 0.875rem;">Educational Portfolio Project</span></li>
+                        <li><span style="font-size: 0.875rem;">Not a replacement for clinical advice</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 OralVision AI. All rights reserved.</p>
+                <p>Designed for Healthcare Portfolios.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

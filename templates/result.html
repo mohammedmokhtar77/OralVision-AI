@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result - OralVision AI</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- HEADER -->
+        <header class="header">
+            <div class="nav-container">
+                <a href="/" class="logo">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-blue);">
+                        <path d="M4 12C4 8 7 4 12 4C17 4 20 8 20 12C20 16 18 19 16 20C14.5 20.8 13.5 20 12 20C10.5 20 9.5 20.8 8 20C6 19 4 16 4 12Z"/>
+                        <path d="M12 4V8"/>
+                    </svg>
+                    <span>OralVision</span> AI
+                </a>
+                <nav class="nav-menu-wrapper">
+                    <ul class="nav-menu">
+                        <li><a href="/" class="nav-link">Home</a></li>
+                        <li><a href="/result?new=true" class="nav-link active">Analyze Image</a></li>
+                        <li><a href="/about" class="nav-link">About & Model</a></li>
+                    </ul>
+                </nav>
+                <button class="burger" aria-label="Toggle navigation">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="result-container scroll-reveal active">
+                
+                <!-- RESULT TOP HEADER -->
+                <div class="result-header-row">
+                    <div>
+                        <span class="section-label">Diagnostic Output</span>
+                        <h1 style="font-size: 2.25rem; font-family: var(--font-heading); margin-top: 0.5rem; color: var(--dark-navy);">Analysis Complete</h1>
+                    </div>
+                    <div class="meta-stats">
+                        <span>Model: <strong>EfficientNetB0</strong></span>
+                        <span>Inference Time: <strong>{{ data.prediction_time }}</strong></span>
+                    </div>
+                </div>
+
+                <!-- RESULT GRID -->
+                <div class="result-grid">
+                    
+                    <!-- COLUMN 1: IMAGE PREVIEW & HARDWARE METADATA -->
+                    <div class="glass-panel result-image-card">
+                        <div class="result-image-box">
+                            <img src="{{ url_for('static', filename='uploads/' + data.filename) }}" alt="Analyzed Oral Structure">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.85rem; color: var(--text-secondary);">
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #E2E8F0; padding-bottom: 0.5rem;">
+                                <span>Input Dimensions</span>
+                                <strong style="color: var(--dark-navy);">224 &times; 224 RGB</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #E2E8F0; padding-bottom: 0.5rem;">
+                                <span>Image Classification</span>
+                                <strong style="color: var(--dark-navy);">6 Diseases</strong>
+                            </div>
+                            <a href="/result?new=true" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                                Analyze New Image
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- COLUMN 2: CLINICAL EVALUATION & PROBABILITIES -->
+                    <div class="analysis-dashboard">
+                        
+                        <!-- PRIMARY DIAGNOSIS -->
+                        <div class="glass-panel primary-diagnosis-card">
+                            <div class="diagnosis-header">
+                                <div>
+                                    <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--text-muted);">Primary Detections</span>
+                                    <h2 style="margin-top: 0.25rem;">{{ data.prediction }}</h2>
+                                </div>
+                                <span class="confidence-badge">{{ data.confidence }} Match</span>
+                            </div>
+                            <p>{{ data.description }}</p>
+                        </div>
+
+                        <!-- TOP 3 PREDICTIONS BARS -->
+                        <div class="glass-panel dashboard-section">
+                            <h3 class="section-subheading">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-blue);"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                Probability Distribution
+                            </h3>
+                            <div class="bar-chart-container">
+                                {% for pred in data.top_predictions %}
+                                <div class="prob-bar-wrapper">
+                                    <div class="prob-label-row">
+                                        <span class="class-title">{{ pred.display_name }}</span>
+                                        <span>{{ pred.confidence }}%</span>
+                                    </div>
+                                    <div class="bar-track">
+                                        <div class="bar-fill" data-percentage="{{ pred.confidence }}"></div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- CLINICAL SYMPTOMS & CLINICIAN RECOMMENDATION -->
+                        <div class="glass-panel dashboard-section">
+                            <h3 class="section-subheading">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-cyan);"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path><line x1="12" y1="11" x2="12" y2="17"></line><line x1="9" y1="14" x2="15" y2="14"></line></svg>
+                                Symptomatology & Recommendations
+                            </h3>
+                            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                                <div>
+                                    <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--dark-navy);">Common Symptoms Include:</h4>
+                                    <ul class="bullets-list">
+                                        {% for symptom in data.symptoms %}
+                                        <li>{{ symptom }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--dark-navy);">Recommended Next Steps:</h4>
+                                    <div class="recommendation-box">
+                                        {{ data.recommendation }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- FULL-WIDTH MEDICAL DISCLAIMER -->
+                    <div class="disclaimer-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                        <div>
+                            <h4 style="font-size: 0.85rem; font-weight: 700; color: #D97706; margin-bottom: 0.25rem;">Medical Disclaimer & Notice</h4>
+                            <p>
+                                The analysis report displayed above is generated using a computer-vision deep learning model for educational demonstration purposes. This system is not a medical diagnostic tool, does not represent clinical consultation, and must not be used as a replacement for professional dental diagnosis, assessment, or advice. Always consult a registered dentist or oral healthcare professional for treatment recommendations.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-blue);">
+                            <path d="M4 12C4 8 7 4 12 4C17 4 20 8 20 12C20 16 18 19 16 20C14.5 20.8 13.5 20 12 20C10.5 20 9.5 20.8 8 20C6 19 4 16 4 12Z"/>
+                            <path d="M12 4V8"/>
+                        </svg>
+                        <span>OralVision</span> AI
+                    </a>
+                    <p>Advanced Deep Learning for rapid detection and classification of dental pathologies.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/result?new=true">Analyze Image</a></li>
+                        <li><a href="/about">About & Model</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal & Safety</h4>
+                    <ul>
+                        <li><span style="font-size: 0.875rem;">Educational Portfolio Project</span></li>
+                        <li><span style="font-size: 0.875rem;">Not a replacement for clinical advice</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 OralVision AI. All rights reserved.</p>
+                <p>Designed for Healthcare Portfolios.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

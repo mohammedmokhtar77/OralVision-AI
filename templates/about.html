@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About & Methodology - OralVision AI</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- HEADER -->
+        <header class="header">
+            <div class="nav-container">
+                <a href="/" class="logo">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-blue);">
+                        <path d="M4 12C4 8 7 4 12 4C17 4 20 8 20 12C20 16 18 19 16 20C14.5 20.8 13.5 20 12 20C10.5 20 9.5 20.8 8 20C6 19 4 16 4 12Z"/>
+                        <path d="M12 4V8"/>
+                    </svg>
+                    <span>OralVision</span> AI
+                </a>
+                <nav class="nav-menu-wrapper">
+                    <ul class="nav-menu">
+                        <li><a href="/" class="nav-link">Home</a></li>
+                        <li><a href="/result?new=true" class="nav-link">Analyze Image</a></li>
+                        <li><a href="/about" class="nav-link active">About & Model</a></li>
+                    </ul>
+                </nav>
+                <button class="burger" aria-label="Toggle navigation">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="about-container scroll-reveal active">
+                
+                <!-- HEADER INTRO -->
+                <div class="about-header">
+                    <span class="section-label">Research & Development</span>
+                    <h1>Model Selection & Methodology</h1>
+                    <p>Understanding the deep learning pipeline, comparative evaluations, and deployment decisions behind OralVision AI.</p>
+                </div>
+
+                <!-- PROJECT MOTIVATION -->
+                <div class="glass-panel about-section-card">
+                    <h2>Project Overview & Motivation</h2>
+                    <p>
+                        Oral diseases remain a significant public health issue globally, causing pain, discomfort, and even systemic infections when left untreated. Early identification of conditions like dental caries, calculus build-up, and oral ulcers plays a crucial role in preventing long-term periodontal deterioration.
+                    </p>
+                    <p>
+                        <strong>OralVision AI</strong> is built as an educational clinical screening tool to demonstrate how Computer Vision and Transfer Learning can support dental professionals and patients by providing rapid, secondary screenings of visual symptoms.
+                    </p>
+                </div>
+
+                <!-- PIPELINE PROCESS -->
+                <div class="glass-panel about-section-card">
+                    <h2>The Training & Inference Pipeline</h2>
+                    <p>
+                        The model was trained on a curated dataset containing clinical visual representations of 6 distinct oral conditions. The pipeline progresses through four structured stages:
+                    </p>
+                    <div class="pipeline-grid">
+                        <div class="glass-card pipeline-step">
+                            <span class="step-num">01</span>
+                            <h3>Data Prep</h3>
+                            <p>All input clinical images are cleaned, normalized, and resized to 224 &times; 224 pixels.</p>
+                        </div>
+                        <div class="glass-card pipeline-step">
+                            <span class="step-num">02</span>
+                            <h3>Augmentation</h3>
+                            <p>Rotations, zoom ranges, shifts, and brightness scaling were applied to build model generalization.</p>
+                        </div>
+                        <div class="glass-card pipeline-step">
+                            <span class="step-num">03</span>
+                            <h3>Feature Ext.</h3>
+                            <p>Pre-trained neural weights extracted deep structural boundaries and color parameters.</p>
+                        </div>
+                        <div class="glass-card pipeline-step">
+                            <span class="step-num">04</span>
+                            <h3>Classification</h3>
+                            <p>Softmax top layers map feature sets into the 6 targeted oral disease probability distributions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DEEP LEARNING COMPARISON -->
+                <div class="glass-panel about-section-card">
+                    <h2>Why EfficientNetB0 Was Selected</h2>
+                    <p>
+                        During the research phase, four neural network architectures were evaluated on identical splits of the dataset (consisting of 3,894 training, 834 validation, and 835 test images). The results show that transfer learning models drastically outperform networks trained from scratch:
+                    </p>
+                    
+                    <div class="table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Model Architecture</th>
+                                    <th>Train Accuracy</th>
+                                    <th>Val Accuracy</th>
+                                    <th>Test Accuracy</th>
+                                    <th>F1-Score (Weighted)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Custom CNN</td>
+                                    <td>78.99%</td>
+                                    <td>76.86%</td>
+                                    <td>75.81%</td>
+                                    <td>0.80</td>
+                                    <td>Baseline</td>
+                                </tr>
+                                <tr>
+                                    <td>MobileNetV2</td>
+                                    <td>86.57%</td>
+                                    <td>78.78%</td>
+                                    <td>81.20%</td>
+                                    <td>0.81</td>
+                                    <td>Evaluated</td>
+                                </tr>
+                                <tr>
+                                    <td>ResNet50</td>
+                                    <td>88.21%</td>
+                                    <td>80.58%</td>
+                                    <td>81.68%</td>
+                                    <td>0.82</td>
+                                    <td>Evaluated</td>
+                                </tr>
+                                <tr class="highlighted-row">
+                                    <td class="strong-text">EfficientNetB0</td>
+                                    <td class="strong-text">87.42%</td>
+                                    <td class="strong-text">82.01%</td>
+                                    <td class="strong-text">81.80%</td>
+                                    <td class="strong-text">0.81</td>
+                                    <td><span class="table-badge">Deployed</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p style="margin-top: 2rem;">
+                        <strong>Key Decision Factors:</strong> While ResNet50 demonstrated highly competitive accuracies and a slightly better F1-score structure, <strong>EfficientNetB0</strong> achieved the highest overall <strong>Test Accuracy (81.80%)</strong> and the best generalization profile (Validation Accuracy of <strong>82.01%</strong>). Its compound scaling architecture makes it lightweight, highly efficient, and ideal for responsive web application hosting.
+                    </p>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-blue);">
+                            <path d="M4 12C4 8 7 4 12 4C17 4 20 8 20 12C20 16 18 19 16 20C14.5 20.8 13.5 20 12 20C10.5 20 9.5 20.8 8 20C6 19 4 16 4 12Z"/>
+                            <path d="M12 4V8"/>
+                        </svg>
+                        <span>OralVision</span> AI
+                    </a>
+                    <p>Advanced Deep Learning for rapid detection and classification of dental pathologies.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/result?new=true">Analyze Image</a></li>
+                        <li><a href="/about">About & Model</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal & Safety</h4>
+                    <ul>
+                        <li><span style="font-size: 0.875rem;">Educational Portfolio Project</span></li>
+                        <li><span style="font-size: 0.875rem;">Not a replacement for clinical advice</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 OralVision AI. All rights reserved.</p>
+                <p>Designed for Healthcare Portfolios.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
