@@ -293,6 +293,36 @@ button, input {
     max-width: 540px;
 }
 
+.hero-developer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.hero-social-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hero-social-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hero-social-links a i {
+    font-size: 3rem;
+    color: var(--primary-blue);
+    transition: var(--transition-fast);
+}
+
+.hero-social-links a i:hover {
+    color: var(--accent-cyan);
+    transform: translateY(-3px);
+}
+
 .hero-actions {
     display: flex;
     gap: 1rem;
