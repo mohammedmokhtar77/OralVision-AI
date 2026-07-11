@@ -10,6 +10,8 @@ Four different deep learning architectures were developed and compared to identi
 
 The final deployed model is **EfficientNetB0**, which achieved the highest validation performance while maintaining a lightweight architecture suitable for real-time inference.
 
+![Home Page](AppImages/home.png)
+
 ---
 
 # 📂 Project Workflow
@@ -298,32 +300,31 @@ http://127.0.0.1:5000
 
 ## 1. Home Page
 
-```
+
 ![Home Page](AppImages/home.png)
-```
+
 
 ---
 
 ## 2. Prediction Page
 
-```
+
 ![Prediction Page](AppImages/prediction.png)
-```
 
 ---
 
 ## 3. Prediction Result
 
-```
+
 ![Prediction Result](AppImages/predictionResult.png)
 ![Prediction Result](AppImages/predictionResult2.png)
-```
+
 
 ---
 
 ## 4. About Page
 
-```
+
 ![About Page](AppImages/about-c.png)
 ![About Page](AppImages/about.png)
 
